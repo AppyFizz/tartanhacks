@@ -17,5 +17,7 @@ https://westus.api.cognitive.microsoft.com/sts/v1.0/issuetoken
 
 <string name="app_name">tartanhacks</string>
 <string name="action_settings">Settings</string>
+    <string name="my_cart">My Cart</string>
+    <string name="delete">DELETE</string>
 </resources>
 

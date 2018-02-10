@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://D:\Code\Android\tartanhacks\Desktop.iml" filepath="D:\Code\Android\tartanhacks\Desktop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TartanHacks.iml" filepath="$PROJECT_DIR$/TartanHacks.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/tartanhacks.iml" filepath="$PROJECT_DIR$/tartanhacks.iml" />
     </modules>

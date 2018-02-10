@@ -118,6 +118,9 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
      EditText _logText2;
     EditText _logText;
     Button _startButton;
+    Button _stopButton;
+
+    private String coolString;
 
 
     public enum FinalResponseStatus { NotReceived, OK, Timeout }
@@ -169,6 +172,8 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
         this._logText2 = findViewById(R.id.editText2);
         this._logText = findViewById(R.id.editText1);
         this._startButton = findViewById(R.id.button1);
+        this._stopButton = findViewById(R.id.button2);
+        this._stopButton.setEnabled(false);
 
         if (getString(R.string.primaryKey).startsWith("Please")) {
             new AlertDialog.Builder(this)
@@ -184,6 +189,12 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
             @Override
             public void onClick(View arg0) {
                 This.StartButton_Click();
+            }
+        });
+        this._stopButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                This.StopButtonClick();
             }
         });
         Button buttonPositiveSample = (Button) findViewById(R.id.btn_positive_sample);
@@ -233,7 +244,6 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
                 List<RequestDocIncludeLanguage> textDocs = new ArrayList<>();
                 textDocs.add(mDocIncludeLanguage);
                 mTextIncludeLanguageRequest = new TextRequest(textDocs);
-
             }
         });
 
@@ -251,6 +261,8 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
 
         // Request for network calls
         mRequest = new ServiceRequestClient(mSubscriptionKey);
+
+        coolString = "";
     }
     /**
      * Clean up UI and network requests onPause()
@@ -422,7 +434,6 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
      */
     private void getSentimentScore() {
         showProgressDialog();
-
         mSentimentCallback = new ServiceCallback(mRequest.getRetrofit()) {
             @Override
             public void onResponse(Call call, Response response) {
@@ -440,7 +451,6 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
                 dismissProgressDialog();
             }
         };
-
         try {
             mSentimentCall = mRequest.getSentimentAsync(mTextIncludeLanguageRequest, mSentimentCallback);
         } catch (IllegalArgumentException e) {
@@ -465,12 +475,10 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         if (id == R.id.action_add_key) {
             Intent intent = new Intent(this, KeyActivity.class);
             startActivity(intent);
         }
-
         return super.onOptionsItemSelected(item);
     }
     /**
@@ -490,10 +498,14 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
             this.micClient.setAuthenticationUri(this.getAuthenticationUri());
         }
         this.micClient.startMicAndRecognition();
+        this._stopButton.setEnabled(true);
     }
 
     private void StopButtonClick() {
-
+        this._stopButton.setEnabled(false);
+        if (this.micClient != null)
+            this.micClient.endMicAndRecognition();
+        this._startButton.setEnabled(true);
     }
 
     /**

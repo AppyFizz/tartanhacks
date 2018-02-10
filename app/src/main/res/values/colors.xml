@@ -15,4 +15,7 @@
     <color name="bg_row_background">#fa315b</color>
     <color name="item_name">#535353</color>
     <color name="description">#a9a9a9</color>
+    <color name="gray_400">#bdbdbd</color>
+    <color name="gray_600">#757575</color>
+    <color name="light_green">#00beab</color>
 </resources>

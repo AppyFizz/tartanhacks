@@ -25,7 +25,7 @@ public class Item {
     }
 
     public void setId(int id) {
-        this.id = id;
+        Item.id = id;
     }
 
     public String getName() {
@@ -33,7 +33,7 @@ public class Item {
     }
 
     public void setName(String name) {
-        this.name = name;
+        Item.name = name;
     }
 
     public String getDescription() {
@@ -41,7 +41,7 @@ public class Item {
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        Item.description = description;
     }
 
     public double getTime() {
@@ -49,7 +49,7 @@ public class Item {
     }
 
     public void setPrice(double price) {
-        this.time = price;
+        time = price;
     }
 
 }

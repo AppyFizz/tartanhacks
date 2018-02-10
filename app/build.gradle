@@ -21,12 +21,12 @@ android {
     productFlavors {
         x86 {
             ndk {
-             //   abiFilter "x86"
+                //   abiFilter "x86"
             }
         }
         arm {
             ndk {
-             //   abiFilters "armeabi"
+                //   abiFilters "armeabi"
             }
         }
     }

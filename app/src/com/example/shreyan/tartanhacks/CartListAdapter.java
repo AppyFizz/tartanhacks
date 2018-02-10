@@ -5,6 +5,7 @@ package com.example.shreyan.tartanhacks;
  */
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +43,16 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.MyView
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.cart_list_item, parent, false);
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(context, ItemDetail.class);
+                //intent.putExtra("recipe", Parcels.wrap(recipe));
+                context.startActivity(intent);
+            }
+        });
 
         return new MyViewHolder(itemView);
     }

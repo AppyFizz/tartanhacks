@@ -61,7 +61,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="20dp"
-        android:text="1) personal medical record \n2) health care team \n3) treatment reports, \n4)health insurance claims \n5)test results \n6)new doctor \n6) nutrition"
+        android:text="1) personal medical record \n2) health care team \n3) treatment reports, \n4)health insurance claims \n5)test results \n6)new doctor \n7) nutrition"
         android:textStyle="italic" />
 
     <TextView

@@ -89,30 +89,6 @@ tools:context="com.example.shreyan.tartanhacks.MainActivity" >
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btn_positive_sample"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/space_medium"
-                    android:layout_weight="1"
-                    android:text="@string/button_positive_sample" />
-
-                <Button
-                    android:id="@+id/btn_negative_sample"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/space_medium"
-                    android:layout_weight="1"
-                    android:text="@string/button_negative_sample" />
-            </LinearLayout>
-
 
             <FrameLayout
                 android:layout_width="match_parent"

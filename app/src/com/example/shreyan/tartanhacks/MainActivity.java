@@ -116,9 +116,6 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
     Button _startButton;
     Button _stopButton;
 
-    private String coolString;
-
-
     public enum FinalResponseStatus { NotReceived, OK, Timeout }
 
     /**
@@ -193,8 +190,6 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
                 This.StopButtonClick();
             }
         });
-        Button buttonPositiveSample = (Button) findViewById(R.id.btn_positive_sample);
-        Button buttonNegativeSample = (Button) findViewById(R.id.btn_negative_sample);
 
         mTextInput = (TextInputEditText) findViewById(R.id.text_input);
         mClearButton = (ImageButton) findViewById(R.id.clear_all);
@@ -246,8 +241,6 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
         mSubscriptionKey = Utils.getAPiKey(this); // get API key from either strings.xml or SharedPreferences
 
         // Set OnClick listeners
-        buttonPositiveSample.setOnClickListener(this);
-        buttonNegativeSample.setOnClickListener(this);
         mClearButton.setOnClickListener(this);
         ((TextView) findViewById(R.id.detect_language)).setOnClickListener(this);
         ((TextView) findViewById(R.id.get_key_phrases)).setOnClickListener(this);
@@ -258,7 +251,6 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
         // Request for network calls
         mRequest = new ServiceRequestClient(mSubscriptionKey);
 
-        coolString = "";
     }
     /**
      * Clean up UI and network requests onPause()
@@ -290,12 +282,6 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_positive_sample:
-                loadSampleText(_logText2.getText().toString());
-                break;
-            case R.id.btn_negative_sample:
-                loadSampleText(getString(R.string.negative_sample));
-                break;
             case R.id.clear_all:
                 clearText();
                 break;

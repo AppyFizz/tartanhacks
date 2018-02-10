@@ -21,7 +21,7 @@ https://westus.api.cognitive.microsoft.com/sts/v1.0/issuetoken
     <string name="delete">DELETE</string>
 
     <!-- TODO: Please add the subscription key here -->
-    <string name="subscription_key">Please_add_the_subscription_key_here</string>
+    <string name="subscription_key">24aa889f56514fd799593a9d07ff06ce</string>
 
     <!-- Strings on the Main screen -->
     <string name="load_sample_text">Load sample text or enter your own:</string>

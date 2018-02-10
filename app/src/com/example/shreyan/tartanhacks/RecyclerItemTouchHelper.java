@@ -1,4 +1,4 @@
-package java.com.example.shreyan.tartanhacks;
+package com.example.shreyan.tartanhacks;
 
 import android.graphics.Canvas;
 import android.support.v7.widget.RecyclerView;

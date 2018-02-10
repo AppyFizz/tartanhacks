@@ -1,4 +1,4 @@
-package java.com.example.shreyan.tartanhacks;
+package com.example.shreyan.tartanhacks;
 
 /**
  * Created by ravi on 26/09/17.

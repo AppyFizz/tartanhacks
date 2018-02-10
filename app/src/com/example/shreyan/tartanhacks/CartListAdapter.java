@@ -1,4 +1,4 @@
-package java.com.example.shreyan.tartanhacks;
+package com.example.shreyan.tartanhacks;
 
 /**
  * Created by ravi on 26/09/17.
@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.example.shreyan.tartanhacks.R;
 
 import java.util.List;
 

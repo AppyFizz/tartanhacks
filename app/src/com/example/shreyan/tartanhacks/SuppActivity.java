@@ -1,4 +1,4 @@
-package java.com.example.shreyan.tartanhacks;
+package com.example.shreyan.tartanhacks;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -10,12 +10,9 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.View;
-
-import com.example.shreyan.tartanhacks.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,10 +30,6 @@ public class SuppActivity extends AppCompatActivity implements RecyclerItemTouch
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supp);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(getString(R.string.my_cart));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         recyclerView = findViewById(R.id.recycler_view);
         coordinatorLayout = findViewById(R.id.coordinator_layout);

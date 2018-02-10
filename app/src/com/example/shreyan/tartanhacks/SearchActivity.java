@@ -1,7 +1,9 @@
 package com.example.shreyan.tartanhacks;
 
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
@@ -24,21 +26,24 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class SearchActivity extends AppCompatActivity {
 
+    static TextView searchText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        TextView searchText = (TextView) findViewById(R.id.result);
+        searchText = (TextView) findViewById(R.id.result);
         searchText.setText("Hi Bing!");
         new BingAsyncTask().execute();
     }
 
-    static String subscriptionKey = "3b63ff95-ada7-4614-a13f-7a8b180169b3";
+    static String subscriptionKey = "512105a5848a43b29f4dd8078d3390f3";
     static String host = "https://api.cognitive.microsoft.com";
     static String path = "/bing/v7.0/search";
     static String searchTerm = "Ross O'Connell";
 
-    public class BingAsyncTask extends AsyncTask<Void, Void, SearchResults> {
+    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
+    public static class BingAsyncTask extends AsyncTask<Void, Void, SearchResults> {
         @Override
         protected SearchResults doInBackground(Void... params) {
             if (subscriptionKey.length() != 32) {
@@ -64,8 +69,12 @@ public class SearchActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(SearchResults searchResults) {
             super.onPostExecute(searchResults);
-            TextView searchText = (TextView) findViewById(R.id.result);
-            searchText.setText(searchResults.jsonResponse);
+            try {
+                searchText.setText(prettify(searchResults.jsonResponse.toString()));
+            } catch (JSONException | NullPointerException e) {
+                Log.e("Search", e.getMessage());
+            }
+
         }
     }
 

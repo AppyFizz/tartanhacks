@@ -28,6 +28,7 @@
         <activity android:name=".SuppActivity"></activity>
         <activity android:name=".ItemDetail" />
         <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".DetectedTopicActivity"></activity>
     </application>
 
     <!--<application-->
@@ -48,6 +49,7 @@
         <!--<activity android:name=".SuppActivity"></activity>-->
         <!--<activity android:name=".ItemDetail" />-->
         <!--<activity android:name=".MainActivity"></activity>-->
+    <!--<activity android:name=".DetectedTopicActivity"></activity>-->
     <!--</application>-->
 
 </manifest>

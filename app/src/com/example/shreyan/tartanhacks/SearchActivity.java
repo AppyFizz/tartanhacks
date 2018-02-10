@@ -69,8 +69,12 @@ public class SearchActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(SearchResults searchResults) {
             super.onPostExecute(searchResults);
-            if (searchResults != null)
-                searchText.setText(searchResults.jsonResponse);
+            try {
+                searchText.setText(prettify(searchResults.jsonResponse.toString()));
+            } catch (JSONException | NullPointerException e) {
+                Log.e("Search", e.getMessage());
+            }
+
         }
     }
 

@@ -119,6 +119,7 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
     EditText _logText;
     Button _startButton;
 
+
     public enum FinalResponseStatus { NotReceived, OK, Timeout }
 
     /**

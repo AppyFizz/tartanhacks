@@ -46,7 +46,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -111,10 +110,12 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
     DataRecognitionClient dataClient = null;
     MicrophoneRecognitionClient micClient = null;
     FinalResponseStatus isReceivedResponse = FinalResponseStatus.NotReceived;
-     EditText _logText2;
+    EditText _logText2;
     EditText _logText;
-    Button _startButton;
-    Button _stopButton;
+    ImageButton _startButton;
+    ImageButton _stopButton;
+
+
 
     public enum FinalResponseStatus { NotReceived, OK, Timeout }
 
@@ -167,7 +168,11 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
         this._startButton = findViewById(R.id.button1);
         this._stopButton = findViewById(R.id.button2);
         this._stopButton.setEnabled(false);
-
+        /*
+        _logText2.setScroller(new Scroller(this));
+        _logText2.setVerticalScrollBarEnabled(true);
+        _logText2.setMovementMethod(new ScrollingMovementMethod());
+        */
         if (getString(R.string.primaryKey).startsWith("Please")) {
             new AlertDialog.Builder(this)
                     .setTitle(getString(R.string.add_subscription_key_tip_title))
@@ -196,7 +201,6 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
 
         mKeyPhrases = (TextView) findViewById(R.id.key_phrases);
         mDetectedLanguage = (TextView) findViewById(R.id.detected_language);
-        mSentimentScore = (TextView) findViewById(R.id.sentiment_score);
 
         mTextInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -242,11 +246,7 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
 
         // Set OnClick listeners
         mClearButton.setOnClickListener(this);
-        ((TextView) findViewById(R.id.detect_language)).setOnClickListener(this);
         ((TextView) findViewById(R.id.get_key_phrases)).setOnClickListener(this);
-        ((TextView) findViewById(R.id.get_sentiment_score)).setOnClickListener(this);
-
-        ((Button) findViewById(R.id.goto_detected_topics)).setOnClickListener(this);
 
         // Request for network calls
         mRequest = new ServiceRequestClient(mSubscriptionKey);
@@ -285,26 +285,9 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
             case R.id.clear_all:
                 clearText();
                 break;
-            case R.id.detect_language:
-                if (Utils.hasApiKey(this, mSubscriptionKey) && Utils.hasText(this, mTextInput)) {
-                    getLanguages();
-                }
-                break;
             case R.id.get_key_phrases:
                 if (Utils.hasApiKey(this, mSubscriptionKey) && Utils.hasText(this, mTextInput)) {
                     getKeyPhrases();
-                }
-                break;
-            case R.id.get_sentiment_score:
-                if (Utils.hasApiKey(this, mSubscriptionKey) && Utils.hasText(this, mTextInput)) {
-                    getSentimentScore();
-                }
-                break;
-            case R.id.goto_detected_topics:
-                if (Utils.hasApiKey(this, mSubscriptionKey)) {
-                    startActivity(DetectedTopicActivity.createIntent(this, mSubscriptionKey));
-                } else {
-                    Toast.makeText(this, getString(R.string.need_API_key), Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
@@ -314,7 +297,6 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
     private void loadSampleText(String sampleText) {
         mTextInput.requestFocus();
         mTextInput.setText(sampleText);
-
         mTextInput.clearFocus();        // clear focus once sample text is entered
         mTextInput.setError(null);      // clear error once sample text is entered
         mClearButton.setVisibility(View.GONE);
@@ -353,7 +335,7 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
                 LanguageResponse languageResponse = (LanguageResponse) response.body();
                 if (response != null && response.isSuccessful()) {
                     String text = languageResponse.getDocuments().get(0).getDetectedLanguages().get(0).getName();
-                    mDetectedLanguage.setText(text);
+                    mDetectedLanguage.setText("  Detected Language: \n  "+text);
                 }
                 dismissProgressDialog();
             }
@@ -387,11 +369,13 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
                 KeyPhrasesResponse keyPhrasesResponse = (KeyPhrasesResponse) response.body();
                 if (response != null && response.isSuccessful()) {
                     List<String> keyPhrasesStringList = keyPhrasesResponse.getDocuments().get(0).getKeyPhrases();
-                    String keyPhrasesString = keyPhrasesStringList.get(0);
-                    for (int i = 1; i < keyPhrasesStringList.size(); i++) {
-                        keyPhrasesString += ", " + keyPhrasesStringList.get(i);
+                    if (keyPhrasesStringList.size() > 0) {
+                        String keyPhrasesString = keyPhrasesStringList.get(0);
+                        for (int i = 1; i < keyPhrasesStringList.size(); i++) {
+                            keyPhrasesString += ", " + keyPhrasesStringList.get(i);
+                        }
+                        mKeyPhrases.setText(keyPhrasesString);
                     }
-                    mKeyPhrases.setText(keyPhrasesString);
                 }
                 dismissProgressDialog();
             }
@@ -528,7 +512,8 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
                 loadSampleText(response.Results[i].DisplayText);
             }
             this.WriteLine2();
-
+            getLanguages();
+            //mKeyPhrases.setText("");
         }
     }
 

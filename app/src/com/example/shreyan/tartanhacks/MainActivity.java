@@ -63,7 +63,7 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
     DataRecognitionClient dataClient = null;
     MicrophoneRecognitionClient micClient = null;
     FinalResponseStatus isReceivedResponse = FinalResponseStatus.NotReceived;
-    // EditText _logText;
+     EditText _logText2;
     EditText _logText;
     Button _startButton;
 
@@ -113,7 +113,7 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        this._logText = (EditText) findViewById(R.id.editText1);
+        this._logText2 = (EditText) findViewById(R.id.editText2);
         this._logText = (EditText) findViewById(R.id.editText1);
         this._startButton = (Button) findViewById(R.id.button1);
 
@@ -190,12 +190,11 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
         }
 
         if (!isFinalDicationMessage) {
-            this.WriteLine("********* Final n-BEST Results *********");
             for (int i = 0; i < response.Results.length; i++) {
-                this.WriteLine("[" + i + "]" + " Confidence=" + response.Results[i].Confidence +
-                        " Text=\"" + response.Results[i].DisplayText + "\"");
+                this.WriteLine2(response.Results[i].DisplayText);
+
             }
-            this.WriteLine();
+            this.WriteLine2();
         }
     }
 
@@ -254,6 +253,19 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
     private void WriteLine(String text) {
         Log.d("FuckAJ", text);
         this._logText.append(text + "\n");
+        //this._logText.setText(text + "\n");
+    }
+    private void WriteLine2() {
+        this.WriteLine("");
+    }
+
+    /**
+     * Writes the line.
+     * @param text The line to write.
+     */
+    private void WriteLine2(String text) {
+        Log.d("FuckAJ", text);
+        this._logText2.append(text + "\n");
         //this._logText.setText(text + "\n");
     }
 

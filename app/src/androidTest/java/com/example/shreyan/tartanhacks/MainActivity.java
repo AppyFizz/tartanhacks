@@ -36,6 +36,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -267,12 +268,16 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
                                     this.getLuisSubscriptionID());
                 }
                 else {
-                    this.dataClient = SpeechRecognitionServiceFactory.createDataClient(
-                            this,
-                            this.getMode(),
-                            this.getDefaultLocale(),
-                            this,
-                            this.getPrimaryKey());
+                    try {
+                        this.dataClient = SpeechRecognitionServiceFactory.createDataClient(
+                                this,
+                                this.getMode(),
+                                this.getDefaultLocale(),
+                                this,
+                                this.getPrimaryKey());
+                    } catch (Exception e) {
+                        Log.e("WeirdError", e.getMessage());
+                    }
                 }
 
                 this.dataClient.setAuthenticationUri(this.getAuthenticationUri());

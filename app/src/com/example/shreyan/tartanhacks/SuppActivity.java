@@ -3,7 +3,6 @@ package com.example.shreyan.tartanhacks;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -13,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.View;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ public class SuppActivity extends AppCompatActivity implements RecyclerItemTouch
     private RecyclerView recyclerView;
     private List<Item> cartList;
     private CartListAdapter mAdapter;
-    private CoordinatorLayout coordinatorLayout;
+    private RelativeLayout relativeLayout;
 
 
     @Override
@@ -32,7 +32,7 @@ public class SuppActivity extends AppCompatActivity implements RecyclerItemTouch
         setContentView(R.layout.activity_supp);
 
         recyclerView = findViewById(R.id.recycler_view);
-        coordinatorLayout = findViewById(R.id.coordinator_layout);
+        relativeLayout = findViewById(R.id.coordinator_layout);
         cartList = new ArrayList<>();
         mAdapter = new CartListAdapter(this, cartList);
 
@@ -115,7 +115,7 @@ public class SuppActivity extends AppCompatActivity implements RecyclerItemTouch
 
             // showing snack bar with Undo option
             Snackbar snackbar = Snackbar
-                    .make(coordinatorLayout, name + " removed from cart!", Snackbar.LENGTH_LONG);
+                    .make(relativeLayout, name + " removed from cart!", Snackbar.LENGTH_LONG);
             snackbar.setAction("UNDO", new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

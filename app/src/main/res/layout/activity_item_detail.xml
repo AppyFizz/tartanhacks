@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.shreyan.tartanhacks.ItemDetail">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_margin="10dp"
+        android:textSize="20sp"
+        android:text="Cancer Appt - 26th Feb 2018"
+
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/keywords"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/title"
+        android:textStyle="italic"
+        android:text="personal medical record, health care team, treatment reports, medical information, health insurance claims, notes, test results, taxes, compilation, home, complete file, new doctor, review, facility, legal matters, use, office, best ways, safekeeping"/>
+
+    <TextView
+        android:id="@+id/body"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/keywords"
+        android:text="A personal medical record is a compilation of all your medical information, including test results, treatment reports, and notes written by your health care team. While each office and facility keeps a record of your care, it’s important to have a complete file for your own use, so you can share it with a new doctor, review at home to better understand your treatment, or manage your health insurance claims, taxes, and other legal matters. Here is what to include, how to compile it, and the best ways to organize it and store it for safekeeping. " />
+
+</RelativeLayout>

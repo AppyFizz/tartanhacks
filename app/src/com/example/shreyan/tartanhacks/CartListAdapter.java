@@ -62,7 +62,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.MyView
         final Item item = cartList.get(position);
         holder.name.setText(item.getName());
         holder.description.setText(item.getDescription());
-        holder.time.setText(item.getTime()+"min");
+        holder.time.setText(item.getTime()+" min");
     }
 
     @Override

@@ -93,11 +93,7 @@ public class SuppActivity extends AppCompatActivity implements RecyclerItemTouch
     private void prepareCart() {
 
         List<Item> items = new ArrayList<Item>();
-        items.add(new Item (1, "Appointment 1", "description ...", 4.20));
-        items.add(new Item (2, "Appointment 2", "description ...", 2.15));
-        items.add(new Item (3, "Appointment 3", "description ...", 3.22));
-        items.add(new Item (4, "Appointment 4", "description ...", 2.62));
-        items.add(new Item (5, "Appointment 5", "description ...", 4.27));
+        items.add(new Item (1, "Feb Check-up", "Cancer Chemotherapy treatment", 70));
 
         // adding items to cart list
         cartList.clear();

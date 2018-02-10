@@ -34,8 +34,10 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="60dp"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
+                android:padding="10dp">
 
                 <ImageButton
                     android:id="@+id/button1"
@@ -59,43 +61,58 @@
                     android:text="Pause" />
 
                 <TextView
+                    android:id="@+id/detected_language"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:id="@+id/detected_language"
-                    android:textStyle="italic|bold"
-                    android:text="  Detected Language: \n  -"/>
+                    android:text="  Detected Language: \n  (Unknown)"
+                    android:textStyle="italic|bold" />
 
             </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold|italic"
+                android:text="Conversation:"/>
 
 
             <EditText
                 android:id="@+id/editText1"
                 android:layout_width="fill_parent"
-                android:layout_height="150dp"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/button1"
+                android:layout_height="100dp"
                 android:ems="10"
+                android:layout_margin="10dp"
                 android:inputType="textMultiLine|textNoSuggestions"
-                android:textSize="15dp" />
+                android:textSize="16sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold|italic"
+                android:text="Notes:"/>
+
 
             <!--android:layout_height="fill_parent"-->
             <EditText
                 android:id="@+id/editText2"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/editText1"
-                android:layout_centerHorizontal="true"
+                android:layout_height="100dp"
                 android:ems="10"
-                android:maxHeight="100dp"
+                android:layout_margin="10dp"
                 android:inputType="textMultiLine|textNoSuggestions"
-                android:textSize="12dp" />
+                android:maxHeight="200dp"
+                android:textSize="16sp"
+                android:textStyle="italic" />
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <!-- Text input -->
+
+
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -123,17 +140,17 @@
             </FrameLayout>
 
 
-
             <!-- Key phrases -->
             <TextView
                 android:id="@+id/get_key_phrases"
-                android:background="@color/colorPrimaryDark"
-                android:textColor="#FFFFFF"
-                android:padding="5dp"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="@string/label_key_phrases" />
+                android:background="@color/colorPrimaryDark"
+                android:padding="5dp"
+                android:text="@string/label_key_phrases"
+                android:textColor="#FFFFFF"
+                android:textAlignment="center"/>
 
             <TextView
                 android:id="@+id/key_phrases"

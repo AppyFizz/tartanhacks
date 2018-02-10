@@ -1,8 +1,10 @@
 package com.example.shreyan.tartanhacks;
 
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -35,6 +37,16 @@ public class SuppActivity extends AppCompatActivity implements RecyclerItemTouch
         relativeLayout = findViewById(R.id.coordinator_layout);
         cartList = new ArrayList<>();
         mAdapter = new CartListAdapter(this, cartList);
+
+        FloatingActionButton fab =  (FloatingActionButton) findViewById(R.id.go);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SuppActivity.this, MainActivity.class);
+                //intent.putExtra("recipe", Parcels.wrap(recipe));
+                startActivity(intent);
+            }
+        });
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);

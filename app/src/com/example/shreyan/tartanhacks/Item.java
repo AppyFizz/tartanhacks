@@ -15,7 +15,7 @@ public class Item {
 
     public Item (int id, String name, String description, double time) {
         Item.id = id;
-        Item.name = name;
+        Item.setName (name);
         Item.description = description;
         Item.time = time;
     }
@@ -32,7 +32,7 @@ public class Item {
         return name;
     }
 
-    public void setName(String name) {
+    public static void setName(String name) {
         Item.name = name;
     }
 

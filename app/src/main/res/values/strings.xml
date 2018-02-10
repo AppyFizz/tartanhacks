@@ -25,11 +25,7 @@ https://westus.api.cognitive.microsoft.com/sts/v1.0/issuetoken
 
     <!-- Strings on the Main screen -->
     <string name="load_sample_text">Load sample text or enter your own:</string>
-    <string name="button_positive_sample">Positive sample</string>
-    <string name="button_negative_sample">Negative sample</string>
-    <string name="positive_sample">I had a wonderful experience! The rooms were wonderful and the staff were helpful.</string>
-    <string name="negative_sample">I had a terrible time at the hotel. The staff were rude and the food was awful.</string>
-    <string name="hint_input_text">Input for Text Analysis</string>
+    <string name="hint_input_text">Summarizing what\'s important ...</string>
     <string name="edittext_error">Please enter some text for analysis.</string>
     <string name="button_analyze">Analyze</string>
     <string name="label_detected_language">Detected Language</string>

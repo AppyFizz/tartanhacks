@@ -41,7 +41,6 @@ import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -88,7 +87,6 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
     private TextInputEditText mTextInput;
     private TextView mDetectedLanguage;
     private TextView mKeyPhrases;
-    private TextView mSentimentScore;
     private ProgressDialog mProgressDialog;
     private ImageButton mClearButton;
 
@@ -371,9 +369,9 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
                 if (response != null && response.isSuccessful()) {
                     List<String> keyPhrasesStringList = keyPhrasesResponse.getDocuments().get(0).getKeyPhrases();
                     if (keyPhrasesStringList.size() > 0) {
-                        String keyPhrasesString = keyPhrasesStringList.get(0);
+                        String keyPhrasesString = "1) " + keyPhrasesStringList.get(0);
                         for (int i = 1; i < keyPhrasesStringList.size(); i++) {
-                            keyPhrasesString += ", " + keyPhrasesStringList.get(i);
+                            keyPhrasesString += "\n" + Integer.toString(i+1) + ") " + keyPhrasesStringList.get(i);
                         }
                         mKeyPhrases.setText(keyPhrasesString);
                     }
@@ -407,7 +405,7 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
                 super.onResponse(call, response);
                 SentimentResponse sentimentResponse = (SentimentResponse) response.body();
                 if (response != null && response.isSuccessful()) {
-                    mSentimentScore.setText(sentimentResponse.getDocuments().get(0).getScore().toString());
+                    //mSentimentScore.setText(sentimentResponse.getDocuments().get(0).getScore().toString());
                 }
                 dismissProgressDialog();
             }
@@ -488,7 +486,7 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
             recoSource = "long wav file";
         }
 
-        this.WriteLine("\n--- Start speech recognition using " + recoSource + " with " + this.getMode() + " mode in " + this.getDefaultLocale() + " language ----\n\n");
+        //this.WriteLine("\n--- Start speech recognition using " + recoSource + " with " + this.getMode() + " mode in " + this.getDefaultLocale() + " language ----\n\n");
     }
 
     public void onFinalResponseReceived(final RecognitionResult response) {
@@ -514,7 +512,6 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
             }
             this.WriteLine2();
             getLanguages();
-            //mKeyPhrases.setText("");
         }
     }
 
@@ -524,7 +521,7 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
     public void onIntentReceived(final String payload) {
         this.WriteLine("--- Intent received by onIntentReceived() ---");
         this.WriteLine(payload);
-        this.WriteLine();
+        //this.WriteLine();
     }
 
     public void onPartialResponseReceived(final String response) {
@@ -546,8 +543,7 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
      * @param recording The current recording state
      */
     public void onAudioEvent(boolean recording) {
-        this.WriteLine("--- Microphone status change received by onAudioEvent() ---");
-        this.WriteLine("********* Microphone status: " + recording + " *********");
+        this.WriteLine("Microphone is now active ...");
         if (recording) {
             this.WriteLine("Please start speaking.");
         }
@@ -571,9 +567,7 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
      * @param text The line to write.
      */
     private void WriteLine(String text) {
-        Log.d("FuckAJ", text);
         this._logText.append(text + "\n");
-        //this._logText.setText(text + "\n");
     }
     private void WriteLine2() {
         this.WriteLine("");
@@ -584,9 +578,7 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
      * @param text The line to write.
      */
     private void WriteLine2(String text) {
-        Log.d("FuckAJ", text);
         this._logText2.append(text + "\n");
-        //this._logText.setText(text + "\n");
     }
 
 //    /**

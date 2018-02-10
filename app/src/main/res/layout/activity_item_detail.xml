@@ -4,39 +4,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="10dp"
     tools:context="com.example.shreyan.tartanhacks.ItemDetail">
 
-    <TextView
-        android:id="@+id/title"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:layout_margin="10dp"
-        android:textSize="20sp"
-        android:text="Cancer Appt - 26th Feb 2018"
+        android:id="@+id/ll">
 
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Chemotherapy Appointment"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/keywords"
-        android:layout_margin="10dp"
-        android:layout_below="@+id/title"
-        android:textStyle="italic"
-        android:text="personal medical record, health care team, treatment reports, medical information, health insurance claims, notes, test results, taxes, compilation, home, complete file, new doctor, review, facility, legal matters, use, office, best ways, safekeeping"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_margin="10dp"
+            android:text="26th Feb 2018"/>
+
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/body"
         android:layout_width="match_parent"
-        android:layout_margin="10dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/keywords"
+        android:layout_margin="10dp"
         android:text="A personal medical record is a compilation of all your medical information, including test results, treatment reports, and notes written by your health care team. While each office and facility keeps a record of your care, it’s important to have a complete file for your own use, so you can share it with a new doctor, review at home to better understand your treatment, or manage your health insurance claims, taxes, and other legal matters. Here is what to include, how to compile it, and the best ways to organize it and store it for safekeeping. " />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_below="@+id/body"
+        android:text="Keywords from this meeting:"/>
+    <TextView
+        android:id="@+id/keywords"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="20dp"
+        android:text="1) personal medical record \n2) health care team \n3) treatment reports, \n4)health insurance claims \n5)test results \n6)new doctor \n6) nutrition"
+        android:textStyle="italic" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:text="Length of meeting: 1 hour, 10 min"/>
 
 </RelativeLayout>

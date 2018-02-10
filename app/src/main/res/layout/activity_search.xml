@@ -7,14 +7,8 @@
 
     <TextView
         android:id="@+id/result"
-        android:text="Hello World"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <ImageView
         android:layout_width="320dp"
         android:layout_height="320dp"
-        android:scaleType="fitXY"
-        android:src="@mipmap/ic_launcher"
-        android:id="@+id/imageView"/>
+        android:text="Hi Bing"/>
 
 </RelativeLayout>

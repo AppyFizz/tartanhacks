@@ -37,7 +37,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.text.Editable;
@@ -50,11 +49,9 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.microsoft.bing.speech.Conversation;
 import com.microsoft.bing.speech.SpeechClientStatus;
 import com.microsoft.cognitive.textanalytics.model.request.RequestDoc;
 import com.microsoft.cognitive.textanalytics.model.request.RequestDocIncludeLanguage;
@@ -73,10 +70,9 @@ import com.microsoft.cognitiveservices.speechrecognition.RecognitionResult;
 import com.microsoft.cognitiveservices.speechrecognition.RecognitionStatus;
 import com.microsoft.cognitiveservices.speechrecognition.SpeechRecognitionMode;
 import com.microsoft.cognitiveservices.speechrecognition.SpeechRecognitionServiceFactory;
-import java.io.InputStream;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -283,7 +279,7 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_positive_sample:
-                loadSampleText(getString(R.string.positive_sample));
+                loadSampleText(_logText2.getText().toString());
                 break;
             case R.id.btn_negative_sample:
                 loadSampleText(getString(R.string.negative_sample));
@@ -531,9 +527,10 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
         if (!isFinalDicationMessage) {
             for (int i = 0; i < response.Results.length; i++) {
                 this.WriteLine2(response.Results[i].DisplayText);
-
+                loadSampleText(response.Results[i].DisplayText);
             }
             this.WriteLine2();
+
         }
     }
 

@@ -40,7 +40,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.text.Editable;
+import android.text.SpannableString;
 import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
+import android.text.method.MovementMethod;
+import android.text.style.ClickableSpan;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -87,6 +92,7 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
     private TextInputEditText mTextInput;
     private TextView mDetectedLanguage;
     private TextView mKeyPhrases;
+    private TextView mSentimentScore;
     private ProgressDialog mProgressDialog;
     private ImageButton mClearButton;
 
@@ -369,11 +375,15 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
                 if (response != null && response.isSuccessful()) {
                     List<String> keyPhrasesStringList = keyPhrasesResponse.getDocuments().get(0).getKeyPhrases();
                     if (keyPhrasesStringList.size() > 0) {
-                        String keyPhrasesString = "1) " + keyPhrasesStringList.get(0);
+                        String keyPhrasesString = keyPhrasesStringList.get(0);
                         for (int i = 1; i < keyPhrasesStringList.size(); i++) {
-                            keyPhrasesString += "\n" + Integer.toString(i+1) + ") " + keyPhrasesStringList.get(i);
+                            keyPhrasesString += ", " + keyPhrasesStringList.get(i);
                         }
                         mKeyPhrases.setText(keyPhrasesString);
+                        for (String s : keyPhrasesStringList) {
+                            new BingAsyncTask().execute(s);
+                            Log.d("seen", "started asynctask");
+                        }
                     }
                 }
                 dismissProgressDialog();
@@ -405,7 +415,7 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
                 super.onResponse(call, response);
                 SentimentResponse sentimentResponse = (SentimentResponse) response.body();
                 if (response != null && response.isSuccessful()) {
-                    //mSentimentScore.setText(sentimentResponse.getDocuments().get(0).getScore().toString());
+                    mSentimentScore.setText(sentimentResponse.getDocuments().get(0).getScore().toString());
                 }
                 dismissProgressDialog();
             }
@@ -486,7 +496,7 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
             recoSource = "long wav file";
         }
 
-        //this.WriteLine("\n--- Start speech recognition using " + recoSource + " with " + this.getMode() + " mode in " + this.getDefaultLocale() + " language ----\n\n");
+        this.WriteLine("\n--- Start speech recognition using " + recoSource + " with " + this.getMode() + " mode in " + this.getDefaultLocale() + " language ----\n\n");
     }
 
     public void onFinalResponseReceived(final RecognitionResult response) {
@@ -512,6 +522,7 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
             }
             this.WriteLine2();
             getLanguages();
+            //mKeyPhrases.setText("");
         }
     }
 
@@ -521,7 +532,7 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
     public void onIntentReceived(final String payload) {
         this.WriteLine("--- Intent received by onIntentReceived() ---");
         this.WriteLine(payload);
-        //this.WriteLine();
+        this.WriteLine();
     }
 
     public void onPartialResponseReceived(final String response) {
@@ -543,7 +554,8 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
      * @param recording The current recording state
      */
     public void onAudioEvent(boolean recording) {
-        this.WriteLine("Microphone is now active ...");
+        this.WriteLine("--- Microphone status change received by onAudioEvent() ---");
+        this.WriteLine("********* Microphone status: " + recording + " *********");
         if (recording) {
             this.WriteLine("Please start speaking.");
         }
@@ -567,10 +579,43 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
      * @param text The line to write.
      */
     private void WriteLine(String text) {
+        Log.d("FuckAJ", text);
         this._logText.append(text + "\n");
+        //this._logText.setText(text + "\n");
     }
     private void WriteLine2() {
         this.WriteLine("");
+    }
+
+    private SpannableString makeLinkSpan(CharSequence text, View.OnClickListener listener) {
+    SpannableString link = new SpannableString(text);
+    link.setSpan(new ClickableString(listener), 0, text.length(),
+            SpannableString.SPAN_INCLUSIVE_EXCLUSIVE);
+    return link;
+}
+
+    private void makeLinksFocusable(TextView tv) {
+        MovementMethod m = tv.getMovementMethod();
+        if ((m == null) || !(m instanceof LinkMovementMethod)) {
+            if (tv.getLinksClickable()) {
+                tv.setMovementMethod(LinkMovementMethod.getInstance());
+            }
+        }
+    }
+
+/*
+ * ClickableString class
+ */
+
+    private static class ClickableString extends ClickableSpan {
+        private View.OnClickListener mListener;
+        public ClickableString(View.OnClickListener listener) {
+            mListener = listener;
+        }
+        @Override
+        public void onClick(View v) {
+            mListener.onClick(v);
+        }
     }
 
     /**
@@ -578,7 +623,29 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
      * @param text The line to write.
      */
     private void WriteLine2(String text) {
-        this._logText2.append(text + "\n");
+        for (String word : text.split(" ")) {
+            if (coolMap.containsKey(word)) {
+                String str = "<a href='" + coolMap.get(word) + "'>" + "</a>";
+                SpannableString link = makeLinkSpan(str, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // respond to click
+
+                    }
+                });
+                // Set the TextView's text
+                this._logText2.append(word);
+                // Append the link we created above using a function defined below.
+                this._logText2.append(link);
+            } else {
+                this._logText2.append(word + " ");
+            }
+        }
+        this._logText2.append("\n");
+        // This line makes the link clickable!
+        makeLinksFocusable(this._logText2);
+        Log.d("FuckAJ", text);
+        //this._logText.setText(text + "\n");
     }
 
 //    /**

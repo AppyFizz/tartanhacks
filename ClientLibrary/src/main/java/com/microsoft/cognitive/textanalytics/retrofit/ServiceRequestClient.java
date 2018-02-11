@@ -56,7 +56,7 @@ import rx.Observable;
 
 public class ServiceRequestClient {
 
-    private static final String BASE_URL = "https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/";
+    private static final String BASE_URL = "https://eastus.api.cognitive.microsoft.com/text/analytics/v2.0/";
     private static final String mHeaderKey = "ocp-apim-subscription-key";
 
     private String mSubscriptionKey;

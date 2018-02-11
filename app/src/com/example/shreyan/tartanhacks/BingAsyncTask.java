@@ -65,6 +65,7 @@ public class BingAsyncTask extends AsyncTask<String, String, SearchResults> {
             String url = ((JSONObject) json.getJSONObject("webPages").
                     getJSONArray("value").get(0)).getString("url");
             coolMap.put(query, url);
+            Log.d("seen", coolMap.toString() + "\n");
         } catch (JSONException e) {
             Log.e("SearchActivity", e.getMessage());
         }

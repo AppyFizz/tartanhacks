@@ -47,7 +47,7 @@ public class KeyActivity extends AppCompatActivity implements View.OnClickListen
 
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mPrefsEditor;
-    public static final String API_KEY = "api_key";
+    public static final String API_KEY = "24aa889f56514fd799593a9d07ff06ce";
     private TextInputEditText mAPIKey;
 
     @Override
@@ -110,7 +110,7 @@ public class KeyActivity extends AppCompatActivity implements View.OnClickListen
     }
 
     private String getApiKeyFromPrefs() {
-        return mSharedPreferences.getString(API_KEY, "");
+        return mSharedPreferences.getString(API_KEY, "24aa889f56514fd799593a9d07ff06ce");
     }
 
 }

@@ -71,6 +71,7 @@ import com.microsoft.cognitiveservices.speechrecognition.SpeechRecognitionMode;
 import com.microsoft.cognitiveservices.speechrecognition.SpeechRecognitionServiceFactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -80,6 +81,7 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
 {
     private String mSubscriptionKey;
 
+    public static HashMap<String, String> coolMap;
     private static final String TAG = MainActivity.class.getSimpleName();
 
     // UI
@@ -114,7 +116,6 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
     EditText _logText;
     ImageButton _startButton;
     ImageButton _stopButton;
-
 
 
     public enum FinalResponseStatus { NotReceived, OK, Timeout }
@@ -162,7 +163,7 @@ public class MainActivity extends Activity implements ISpeechRecognitionServerEv
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        coolMap = new HashMap<>();
         this._logText2 = findViewById(R.id.editText2);
         this._logText = findViewById(R.id.editText1);
         this._startButton = findViewById(R.id.button1);
